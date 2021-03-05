@@ -1,0 +1,31 @@
+#!/bin/bash
+mkdir -p /run/php
+
+if [ ! -f /usr/share/nginx/html/user/initialized ]
+then
+  touch /usr/share/nginx/html/user/initialized
+  cd /init
+  cp -R . /usr/share/nginx/html/user/
+  chown -R www-data:www-data /usr/share/nginx/html
+fi
+
+if [ ! -h /usr/share/nginx/html/cache ]
+then
+  echo "Creating cache"
+  cd /usr/share/nginx/html
+  rm -rf cache
+  mkdir -p ./user/cache
+  ln -s ./user/cache cache
+  chmod 777 -R ./user/cache
+  chmod 777 -R cache
+else
+  chmod 777 -R /usr/share/nginx/html/cache
+  rm -rf /usr/share/nginx/html/cache
+  ln -s /usr/share/nginx/html/user/cache /usr/share/nginx/html/cache
+  chmod 777 -R /usr/share/nginx/html/cache
+fi
+
+while true
+do
+  sleep 60
+done
