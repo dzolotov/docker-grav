@@ -1,2 +1,2 @@
 # docker-grav
-Docker image for the latest Grav CMS
+Grav Flat CMS (with plugins), based on https://hub.docker.com/r/ahumaro/grav-php-nginx/
